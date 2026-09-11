@@ -1,0 +1,70 @@
+name: Checkpoint semanal
+
+on:
+  schedule:
+    - cron: "0 12 * * 5"   # sexta, 09h em Brasília
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  abrir-checkpoint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fechar checkpoint anterior e abrir o da semana
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          HOJE="$(TZ=America/Sao_Paulo date +%F)"
+          INICIO="2026-09-11"
+          FIM="2026-12-19"
+          if [[ "$HOJE" < "$INICIO" || "$HOJE" > "$FIM" ]]; then
+            echo "Fora do semestre 2026.2; nada a fazer."
+            exit 0
+          fi
+          SEMANA=$(( ( $(date -d "$HOJE" +%s) - $(date -d "$INICIO" +%s) ) / 604800 + 1 ))
+          ROTULO="$(printf 'S%02d' "$SEMANA")"
+          DATA="$(date -d "$HOJE" +%d/%m)"
+          TITULO="Checkpoint ${ROTULO} · ${DATA}"
+
+          if gh issue list --label checkpoint --state all --limit 100 --json title --jq '.[].title' | grep -Fxq "$TITULO"; then
+            echo "Já existe: $TITULO"
+            exit 0
+          fi
+
+          for n in $(gh issue list --label checkpoint --state open --json number --jq '.[].number'); do
+            gh issue close "$n" --comment "Encerrado pela abertura do checkpoint ${ROTULO}."
+          done
+
+          case "$HOJE" in
+            2026-09-25|2026-10-09|2026-10-23|2026-11-06|2026-11-27|2026-12-11)
+              AVISO="Hoje tem encontro às 18h. Comente antes: o resumo escrito vira a pauta." ;;
+            2026-11-20)
+              AVISO="Feriado da Consciência Negra. Checkpoint só escrito, sem sync." ;;
+            *)
+              AVISO="Semana sem encontro. Se houver bloqueio, marque a label bloqueado na issue travada." ;;
+          esac
+
+          cat > corpo.md <<CORPO
+          **${AVISO}**
+
+          Até as **18h de hoje**, o ponto focal de cada frente comenta abaixo, uma vez por frente:
+
+          \`\`\`
+          Frente:
+          Feito:
+          Próximo:
+          Bloqueio: (ou "nenhum")
+          \`\`\`
+
+          - [ ] Protocolo
+          - [ ] Verificação
+          - [ ] Produto
+          - [ ] Pesquisa
+          - [ ] Institucional
+          CORPO
+
+          gh issue create --title "$TITULO" --label checkpoint --body-file corpo.md

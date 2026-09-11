@@ -1,0 +1,31 @@
+name: Decisão (ADR)
+description: Proposta de decisão técnica que afeta mais de uma frente
+title: "ADR-00X · "
+labels: ["adr"]
+body:
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto
+      description: Qual problema exige uma decisão agora?
+    validations:
+      required: true
+  - type: textarea
+    id: opcoes
+    attributes:
+      label: Opções consideradas
+      description: Pelo menos duas, com prós, contras e custo.
+    validations:
+      required: true
+  - type: textarea
+    id: proposta
+    attributes:
+      label: Decisão proposta
+    validations:
+      required: true
+  - type: textarea
+    id: impacto
+    attributes:
+      label: Impacto nas outras frentes
+    validations:
+      required: true
