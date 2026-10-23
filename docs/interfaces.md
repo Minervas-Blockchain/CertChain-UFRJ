@@ -10,17 +10,17 @@ Responsável: Verificação.
 
 - Subconjunto adotado do Open Badges 3.0: ver ADR-003.
 - Exemplo canônico: `packages/credential/fixtures/credencial-minima.json`.
-- Canonicalização usada antes do hash: _a definir_.
-- Formato de assinatura: _a definir_.
+- Canonicalização usada antes do hash: JCS (JSON Canonicalization Scheme / RFC 8785).
+- Formato de assinatura: Ancoragem em Lote via Árvore de Merkle (Merkle Proof embutida no objeto `proof`).
 
 ## 2. Folha e árvore de Merkle
 
 Responsáveis: Verificação e Protocolo.
 
 - Entrada da folha: _a definir_ (credencial inteira canonicalizada ou só campos selecionados).
-- Função de hash: _a definir_. A proposta ao Reditus cita SHA-256; a biblioteca `MerkleProof` da OpenZeppelin usa keccak256. A escolha fica registrada no ADR-002.
-- Ordenação dos pares: _a definir_.
-- Onde a prova fica dentro da credencial: _a definir_.
+- Função de hash: `keccak256`. A proposta ao Reditus cita SHA-256; a biblioteca `MerkleProof` da OpenZeppelin usa keccak256. A escolha fica registrada no ADR-002.
+- Ordenação dos pares: Ordenação lexicográfica de pares de hashes para cálculo da raiz.
+- Onde a prova fica dentro da credencial: No atributo `proof` no nó raiz da credencial.
 
 ## 3. Contrato Registry
 
