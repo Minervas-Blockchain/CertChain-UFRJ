@@ -60,11 +60,9 @@ jobs:
           Bloqueio: (ou "nenhum")
           \`\`\`
 
-          - [ ] Protocolo
-          - [ ] Verificação
-          - [ ] Produto
+          - [ ] Código
+          - [ ] Telas
           - [ ] Pesquisa
-          - [ ] Institucional
           CORPO
 
           gh issue create --title "$TITULO" --label checkpoint --body-file corpo.md
