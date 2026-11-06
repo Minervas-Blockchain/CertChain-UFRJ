@@ -1,46 +1,28 @@
-name: Entregável
-description: Uma entrega de uma frente, com critério objetivo de pronto
-title: "Frente · "
+name: Tarefa
+description: Uma entrega pequena, com critério de pronto que dá para responder sim ou não
+title: "Código · "
 body:
-  - type: dropdown
-    id: frente
-    attributes:
-      label: Frente
-      options:
-        - Protocolo
-        - Verificação
-        - Produto
-        - Pesquisa
-        - Institucional
-        - Coordenação
-    validations:
-      required: true
   - type: textarea
-    id: oque
+    id: fazer
     attributes:
-      label: O que é
-      description: Uma ou duas frases.
+      label: O que fazer
+      description: Uma ou duas frases. Comece o título com a frente (Código, Telas ou Pesquisa).
     validations:
       required: true
   - type: textarea
     id: pronto
     attributes:
-      label: Fecha quando
-      description: Critério objetivo. Quem ler precisa conseguir responder sim ou não.
+      label: Pronto quando
+      description: Quem ler precisa conseguir responder sim ou não.
     validations:
       required: true
   - type: dropdown
-    id: tamanho
+    id: etapa
     attributes:
-      label: Tamanho
-      description: Maior que 5 horas? Quebre em mais de uma issue.
+      label: Etapa
       options:
-        - P (até 2h)
-        - M (até 5h)
+        - 1. Decidido (13/11)
+        - 2. Roda no terminal (27/11)
+        - 3. Roda no celular (11/12)
     validations:
       required: true
-  - type: input
-    id: depende
-    attributes:
-      label: Depende de
-      placeholder: "#12, ou nada"

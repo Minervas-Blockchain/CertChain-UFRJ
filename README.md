@@ -16,20 +16,17 @@ Em 11/12/2026, no Demo Day do grupo, emitir certificados reais com prova ancorad
 
 | Frente | Pergunta-guia |
 | --- | --- |
-| Protocolo | O que vai para a blockchain, em qual rede, e como uma credencial é revogada? |
-| Verificação | Como um terceiro confirma, sem falar com a UFRJ, que o certificado é autêntico e não foi revogado? |
-| Produto | Como quem organiza e quem recebe usam o CertChain sem precisar saber que existe blockchain? |
-| Pesquisa | O que já existe, o que não funcionou e onde o CertChain é de fato diferente? |
-| Institucional | Quem emite certificado hoje na UFRJ, como faz, e onde isso dói? |
+| Código | O que vai para a blockchain, como a credencial é montada e como um terceiro confirma, sem falar com a UFRJ, que ela é autêntica? |
+| Telas | Como quem organiza e quem recebe usam o CertChain sem precisar saber que existe blockchain? |
+| Pesquisa | O que já existe, onde o CertChain é diferente e como é hoje a emissão de certificados na UFRJ? |
 
-## Marcos
+## Etapas
 
-| Marco | Data | Fecha quando |
+| Etapa | Até | Pronto quando |
 | --- | --- | --- |
-| M0 · Escopo congelado | 09/10 | ADRs 001 a 004 aprovados e `docs/interfaces.md` v1 revisado |
-| M1 · Vertical slice | 06/11 | Hash, assinatura, root em testnet e verificação por linha de comando |
-| M2 · Emissão utilizável | 27/11 | CSV vira credenciais com QR, validadas na página pública |
-| Demo Day | 11/12 | Certificados reais emitidos e verificados pelos presentes |
+| 1. Decidido | 13/11 | ADR-004, folha Merkle e Registry definidos |
+| 2. Roda no terminal | 27/11 | Emitir e verificar um certificado por comando, ao vivo |
+| 3. Roda no celular | 11/12 | Página pública + QR: o certificado do Demo Day aparece como VÁLIDO |
 
 ## Estrutura
 
@@ -45,4 +42,4 @@ apps/issuer/            painel do emissor
 apps/verifier/          verificação pública
 ```
 
-Leia o [CONTRIBUTING.md](CONTRIBUTING.md) antes da primeira issue.
+Leia o [COMECE-AQUI.md](COMECE-AQUI.md) antes da primeira tarefa.
